@@ -1,4 +1,4 @@
-![bgolebiowski blog](/public/static/images/twitter-card.png)
+![ai dla topornych blog](/public/static/images/twitter-card.png)
 
 # Tailwind Nextjs Starter Blog 
 
