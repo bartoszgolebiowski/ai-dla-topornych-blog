@@ -1,11 +1,11 @@
 const siteMetadata = {
-  title: 'AI dla topornych blog',
+  title: 'AI dla zabieganych blog',
   author: 'Bartosz Golebiowski',
-  headerTitle: 'AI dla topornych blog',
+  headerTitle: 'AI dla zabieganych blog',
   description: 'Blog o technikach prompt engineeringu i dobrych praktykach w komunikacji z AI',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://aidlatopornych.pl/',
+  siteUrl: 'https://aidlazabieganych.pl/',
   siteRepo: 'https://github.com/bartoszgolebiowski/ai-dla-topornych-blog',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
