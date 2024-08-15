@@ -14,7 +14,7 @@ const siteMetadata = {
   twitter: 'https://twitter.com/BartoszEbiowski',
   linkedin: 'https://www.linkedin.com/in/bartosz-go%C5%82%C4%99biowski-12723a159/',
   github: 'https://github.com/bartoszgolebiowski',
-  locale: 'en-US',
+  locale: 'pl-PL',
   analytics: {
     googleAnalyticsId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID, // e.g. UA-000000-2 or G-XXXXXXX
   },
