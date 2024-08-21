@@ -10,7 +10,7 @@ summary: 'W artykule przedstawiam praktyczne metody wykorzystania sztucznej inte
 W tym artykule chciałbym podzielić sie z wami moimi sposobami i narzędziami, które pomogą wam w nauce trudnych tematów. Jednym z takich narzędzi jest sztuczna inteligencja, a dokładniej chat GPT. W poniższym artykule opiszę jak można wykorzystać AI do nauki trudnych tematów.
 
 ## Generowanie notatek z kursów online
-Gdy przygotowywałem się do certyfikacji AWS, zauważyłem, że pod koniec kursu online zapominam o rzeczach, które były na początku. Jest to szczególnie widoczne w przypadku kursów, które trwają kilka tygodni takich jak [ten kurs](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03). Dlatego postanowiłem wykorzystać AI do generowania notatek. 
+Gdy przygotowywałem się do certyfikacji, zauważyłem, że pod koniec kursu online zapominam o rzeczach, które były na początku. Jest to szczególnie widoczne w przypadku kursów, które trwają kilka tygodni, takich jak [ten kurs](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03). Dlatego postanowiłem wykorzystać AI do generowania notatek.
 
 Każdy materiał video posiadał transkrypcję którą można było wykorzystać. Z pomocą narzędzi takich jak modele [GPT-4o](https://platform.openai.com/docs/models/gpt-4o), czy też nawet [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini), można wygenerować notatki z kursu. Pierwszym krokiem jest było pozyskanie takiej transkrypcji. W przypadku kursów na Udemy wyglądało to tak:
 
@@ -25,9 +25,9 @@ Dodatkowy plus takiego podejścia jest taki, że mamy dostęp do notatek z kursu
 ## Nauka języków obcych
 Moim problem w nauce języka obcego jest to, że podczas kowersacji z lektorem pojawiają się nowe słowa. Nawet gdy lektor wyjaśni mi znaczenie, to i tak nie jestem pewny czy dobrze zrozumiałem, ponieważ nie zapisałem sobie tych słów. Jest to szczególnie uciążliwe gdy jakieś słowo pojawia się kilka razy w rozmowie a ja ciągle zapominam o jego znaczeniu. Po zakończeniu rozmowy, zazwyczaj zapominam o tych słowach.
 
-Dlatego postanowiłem wykorzystać AI. W tym celu wykorzystałem zapisywałem rozmowy z lektorem, a następnie wygenerowałem transkrypcję. Skorzystam z płatnych rozwiązań, mianowicie serwisu [Amazon Transcribe](https://aws.amazon.com/transcribe/).  Gdy już posiadałem trakskrypt wykorzystałem narzędzia takie jak [ChatGPT](https://chatgpt.com/) do wygenerowania tabelek ze słówkami. [Przykład czatu](https://chatgpt.com/c/89c8450f-771f-4f76-98b6-027d380fcddc). W ten sposób miałem dostęp do słówek, które pojawiły się w rozmowie. 
+Dlatego postanowiłem wykorzystać AI. W tym celu wykorzystałem zapisywałem rozmowy z lektorem, a następnie wygenerowałem transkrypcję. Skorzystałem z płatnych rozwiązań, aby zamienić video na transkrypcję. Gdy już posiadałem trakskrypt wykorzystałem narzędzia takie jak [ChatGPT](https://chatgpt.com/) do wygenerowania tabelek ze słówkami. [Przykład czatu](https://chatgpt.com/c/89c8450f-771f-4f76-98b6-027d380fcddc). W ten sposób miałem dostęp do słówek, które pojawiły się w rozmowie. 
 
-Drugim krokiem była walidacja moich prac domowych. Traciłem około 5-10 minut każdej lekcji na sprawdzanie moich prac domowych. Wolałbym ten czas poświęcić na naukę niż na sprawdzanie. No i znowu AI do akcji. Wystarczyło wkleić zdjęcie mojej pracy domowej do chatu AI i poprosić o sprawdzenie. 
+Drugim krokiem była walidacja moich prac domowych. Traciłem około 5-10 minut początku każdej nowej lekcji na sprawdzanie moich prac domowych. Wolałbym ten czas poświęcić na naukę niż na sprawdzanie. No i znowu AI do akcji. Wystarczyło wkleić zdjęcie mojej pracy domowej do chatu AI i poprosić o sprawdzenie. 
 
 ![Praca domowa](/blog/skuteczne-metody-nauki-z-ai/praca-domowa.jpg?style=centerme)
 
@@ -45,7 +45,7 @@ e: Bank - Correct
 f: Stadtplan - Correct
 Points: 5/5
 
-2. Beschreiben Sie den Weg. Ergänzen Sie. (Describe the way. Complete.)
+1. Beschreiben Sie den Weg. Ergänzen Sie. (Describe the way. Complete.)
 a: geradeaus - Correct
 b: biegen - Correct
 c: links - Correct
@@ -55,7 +55,7 @@ f: brücke - Correct
 g: ampel - Correct
 Points: 6/6
 
-3. Was ist richtig? Kreuzen Sie an und ergänzen Sie. (What is correct? Check and complete.)
+1. Was ist richtig? Kreuzen Sie an und ergänzen Sie. (What is correct? Check and complete.)
 a: Die Post ist zwischen dem Hotel. - Correct
 b: Das Café ist neben der Bank. - Correct
 c: Die Polizei ist vor dem Bahnhof. - Incorrect (You marked "hinter" as correct. The text says "vor dem Bahnhof," so this is incorrect.)
@@ -64,7 +64,7 @@ e: Der Bahnhof ist hinter der Polizei. - Correct
 f: Das Hotel ist über der Post. - Incorrect (The correct phrase would be "über der Post," but it seems to have a small mistake in completion; the article "der" is not completed.)
 Points: 4/6 (For each correct answer, you get one point. There were 6 questions, and 4 were correct.)
 
-4. Was sagen die Personen? Ergänzen Sie. (What do the people say? Complete.)
+1. Was sagen die Personen? Ergänzen Sie. (What do the people say? Complete.)
 1:
 
 a: kommen - Correct
@@ -93,7 +93,7 @@ Można oczywiście mnożyć przykłady pozyskiwania słownictwa, można wrzucać
 
 Branża IT jest bardzo dynamiczna. Zdałem sobię sprawę, że nie jestem w stanie na bieżąco śledzić wszystkich nowości. Chciałbym chociaż dobrze zrozumieć koncepty, które są niezmienne i które są podstawą dla nowości. Dlatego postanowiłem wykorzystać AI do nauki tych koneptów.
 
-W wolnych chwilach zaczytuję się [Whitepapers](https://aws.amazon.com/whitepapers/), gdzie poruszane są podstawowe koncepty. Ostatnim z nich był [Implementing Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html). Jednak pewne sekcje tego dokumentu były dla mnie zbyt trudne do zrozumienia, albo nie rozumiałem ich w całości. Jest to poważny problem, ponieważ nie chciałbym iść dalej, nie rozumiejąc o co chodzi. W takim przypadku wykorzystałem AI do wyjaśnienia mi tych trudnych sekcji. Wystarczyło wkleić trudną sekcję do narzędzia takiego jak [ChatGPT](https://chatgpt.com/) i poprosić o wyjaśnienie. Dzięki temu mogłem dopytać o konkretne fragmenty, które były dla mnie niezrozumiałe i uzyskać odpowiedzi. Gdy już nawet te odpowiedzi były dla mnie zbyt trudne, prosiłem aby wyjaśniono mi to w bardziej przystępny sposób, tak jakbym miał 10 lat. [Przykład chatu](https://chatgpt.com/share/dbc7e872-24a4-4659-ad50-77dae9bc85fd)
+W wolnych chwilach zaczytuję się blogach i innych materiałach z interesującymi treściami. Przykładem może być [12Factor](https://12factor.net/pl/) Jednak pewne sekcje tego dokumentu były dla mnie zbyt trudne do zrozumienia, albo nie rozumiałem ich w całości. Jest to poważny problem, ponieważ nie chciałbym iść dalej, nie rozumiejąc o co chodzi. W takim przypadku wykorzystałem AI do wyjaśnienia tych trudnych sekcji. Wystarczyło wkleić trudną sekcję do narzędzia takiego jak [ChatGPT](https://chatgpt.com/) i poprosić o wyjaśnienie. Dzięki temu mogłem dopytać o konkretne fragmenty, które były dla mnie niezrozumiałe i uzyskać odpowiedzi. [Przykład chatu](https://chatgpt.com/share/8fb762e2-a08b-436c-a3c2-9d8d99d4200e)
 
 Czasami konwersacje z chatem AI były długie, ponieważ dopytywałem o kolejne kewstie. Chat doskonale sobie radzi w objaśnianiu konceptów, ale nie zawsze jest w stanie odpowiedzieć na konkretne pytania. W takim przypadku warto skonsultować się z ekspertem w danej dziedzinie.
 
