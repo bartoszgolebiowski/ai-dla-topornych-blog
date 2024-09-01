@@ -54,7 +54,7 @@ A tak wygląda nasz [dokument](/blog/tworzenie-dokumentu-z-surowych-notatek/Open
 
 Jedną z moich aktywności są szkolenia, więc moim zadaniem było przygotowanie schludnego dokumentu z kilku prezentacji, surowych notatek i innych źródeł informacji, które były wykorzystywane w ramach szkolenia w celu stworzenia propozycji nowej oferty.
 
-Wszystkie te materiały można przetworzyć w podobny sposób jak w przypadku scenariusza 1. Tylko zamiast surowych materiałów w postaci transkrypcji możemy załączyć do prompta inne surowe materiały, takie jak prezentacje, PDF-y itd, oraz wygenerować na ich podstawie notatki w postaci Markdown. Czat z generowania zapytania można znaleźć  [tutaj](https://chatgpt.com/share/0ab4ffc5-0a60-4ce1-aca5-e6355131ea03).
+Wszystkie te materiały można przetworzyć w podobny sposób jak w przypadku scenariusza 1. Tylko zamiast surowych materiałów w postaci transkrypcji możemy załączyć do prompta inne surowe materiały, takie jak prezentacje, PDF-y, itd. oraz wygenerować na ich podstawie notatki w postaci Markdown. Czat z generowania zapytania można znaleźć  [tutaj](https://chatgpt.com/share/0ab4ffc5-0a60-4ce1-aca5-e6355131ea03).
 
 Teraz już z górki, wystarczy połączyć zapytanie z plikami i wygenerować notatki Markdown. Następnie przekonwertować je do docx i gotowe!
 
