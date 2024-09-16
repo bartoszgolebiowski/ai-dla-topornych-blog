@@ -76,6 +76,8 @@ ORDER BY
     totalRevenue DESC;
 ```
 
+Załączam środowisko do wywoływania SQL na bazie danych z przykładowymi danymi. [Playground](https://raporty-dla-managmentu-sqlite-in-browser.vercel.app/)
+
 # Wizualizacja danych
 Po wygenerowaniu zapytania SQL, możemy je wykonać w naszej bazie danych. Rezultat zapytania możemy zapisać do pliku CSV lub pliku tekstowego. 
 
