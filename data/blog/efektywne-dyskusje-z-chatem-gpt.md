@@ -1,9 +1,9 @@
 ---
 title: 'Funkcja Reply w ChatGPT'
 date: '2024-09-22'
-tags: []
+tags: ['ChatGPT', 'AI', 'nauka', 'reply']
 draft: false
-summary: ''
+summary: 'W artykule omówiono funkcję Reply w ChatGPT, podkreślając jej przydatność w prowadzeniu bardziej efektywnych i kontekstowo świadomych rozmów. Wyjaśniono, jak funkcja ta pozwala na odniesienie się do konkretnych fragmentów wcześniejszej konwersacji, umożliwiając precyzyjniejsze zapytania, szczególnie podczas nauki lub analizy dokumentów.'
 ---
 
 # Wprowadzenie
