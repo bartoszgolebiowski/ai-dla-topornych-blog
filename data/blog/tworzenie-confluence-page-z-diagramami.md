@@ -8,7 +8,7 @@ summary: 'Artykuł opisuje proces tworzenia dokumentacji biznesowej z wykorzysta
 
 # Wprowadzenie
 
-Ostatnio coraz częściej tworzę dokumenty w [Confluence](https://www.atlassian.com/software/confluence/resources/guides/get-started/overview#key-terms). Jest to narzędzie do tworzenia dokumentacji. W tym artykule chciałbym podzielić się z wami jak tworzę takie dokumenty z wykorzystaniem AI. Podczas opisywania procesów biznesowych często wspieram się [Mermaid](https://mermaid.js.org/intro/). Jest to narzędzie do tworzenia diagramów i wykresów. Do wizualizacji korzystam z [Draw.io](https://www.drawio.com/).
+Ostatnio coraz częściej tworzę dokumenty w [Confluence](https://www.atlassian.com/software/confluence/resources/guides/get-started/overview#key-terms). W tym artykule chciałbym podzielić się z wami jak tworzę takie dokumenty z wykorzystaniem AI. Podczas opisywania procesów biznesowych często wspieram się [Mermaid](https://mermaid.js.org/intro/). Jest to format wykorzystywany do tworzenia diagramów i wykresów. Do wizualizacji tych diagramów w Confluence korzystam z [Draw.io](https://www.drawio.com/).
 
 Dla osób które gardzą rozwiązaniem Confluence, przygotowałem również wizualizacje, jak tworzyć identyczne dokumenty w [Notion](https://www.notion.so/).
 
