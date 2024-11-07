@@ -26,9 +26,9 @@ Jednak podziękował mi za propozycję i powiedział, że nie ma czasu na przygo
 ## Transkrypcja spotkania
 
 Używamy Microsoft Teams do prowadzenia spotkań. Microsoft Teams oferuje funkcję transkrypcji spotkania, która pozwala na przekształcenie mowy w tekst. Dzięki temu można łatwo przygotować podsumowanie spotkania. Jest to mniej inwazyjne niż nagrywanie spotkania, nie widać czerwonej lampki, która informuje, że spotkanie jest nagrywane, która może wprowadzać niepotrzebne napięcie.
-Pomimo tego nadal potrzebna jest akceptacja uczestników spotkania na nagrywanie transkrypcji.
+Pomimo tego nadal potrzebna jest akceptacja uczestników spotkania na nagrywanie transkrypcji. W ramach przykładu wykorzystałem spotkanie drużynowe zespołu NodeJS o nazwie "Node.js Performance Team Meeting". 
 
-[Pyrzkładowe spotkanie biznesowe](https://www.youtube.com/watch?v=334glI1nluU)
+[Node.js Performance Team Meeting](https://www.youtube.com/watch?v=334glI1nluU)
 
 [Traksrypcja spotkania](/blog/plan-dzialania-ze-spotkania/transkrypcja.txt)
 
@@ -40,7 +40,7 @@ Niestety, Microsoft Teams nie oferuje funkcji automatycznego generowania planu d
 
 # Rezultat
 
-![Docx](blog/plan-dzialania-ze-spotkania/word.jpg)
+![Docx](/blog/plan-dzialania-ze-spotkania/word.jpg)
 
 Po każdym spotkaniu mój znajomy może teraz przygotować plan działania w kilka minut. Jest tu obszar do poprawy, jak automatyczne generowanie planu działania ze spotkania, gdy transkrypcja zostanie wygenerowana, a następnie przekształcić nowo powstały plik za pomocą customowej wersji GPT, a na końcu wygenerowany plan działania wysłać do uczestników spotkania w wiadomości zwrotnej. 
 
