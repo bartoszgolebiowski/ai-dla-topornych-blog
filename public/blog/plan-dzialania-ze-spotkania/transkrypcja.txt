@@ -1,0 +1,332 @@
+This is the first time that I'm doing that. Yes.
+Hello. So welcome to the first, welcome to the first, not first,
+first live streamed performance meeting. Yeah. Before we start, is there anything that you
+want to share with us? This is the performance issue. You get that issue at the time
+very currently focusing on. If you can all put in your names to the minutes.google document.
+That would be perfect. Yes. So we have a couple of new issues in the agenda as well as
+let's welcome Marvin from preacting that Marvin is going to talk about about the module
+resolution insights that they gained. So let's start. The first issue on the agenda is the
+start time performance regression from upgrading from 16 to 18. That's the issue in the
+knowledge repository. I'm sharing the issue. This was referencing the performance regression from
+16 to 18 and Joy did a couple of optimizations and maybe Joy can tell us what the current status.
+Yes. The question has already been fixed on the main branch. So just need some backports to
+the 18. The one of them has already been backported because that's like simple. But the other
+fixes were pulling me a rewrite instead of a backport. So I'm still working on one of those
+one of those rewrites.
+And we don't have a backport for 18, right? Not yet. Okay.
+And is the issues fixed on the node 19? I think so, right?
+Wish on. This performance regression is fixed on a fixed and released on the latest node 19 version.
+Yes, it's on 19, but not yet on 18. I'm not worth it to backport on 16, but
+okay, I'm just omitting that part of the node. Okay, perfect. Thank you so much for the work that
+you have done. I've been one of the reviewers and it was a really great pull request to find out
+that lazy loading and dependencies were causing that much regression input.
+Thanks. I guess we just should be careful about being too careless when adding a bunch of
+small modules into the bootstrap module graph. I don't know. Yeah, I totally agree.
+Okay, so let's continue to the next issue. Performance issue number 40.
+Node errors are very slow to create. This was a relatively new issue created by Robert. Maybe
+yeah, I actually think this is quite big issue. Because we're kind of saying that
+abort signals should be used in all asynchronous operations that are cancelable.
+And then we provide a primitive, which is very slow. So we're basically slowing down everything
+in node when using a cancelable API. And as we noticed in the Rxjs repo, it's so slow that they
+won't even consider adding support for the cancellation pattern that we recommend people
+to use. And I see that as quite significant issue that affects a lot of code basis that are
+starting to move over to this pattern, elastic search and all of these. Undici also uses
+you know, abort signals for cancellation. So I think we should do something about it. I think
+part of the problem is that what is it? Not event listener, but the web standard event target,
+I think it's called is slow. And I would maybe, even if it wasn't slow, maybe go so far to have,
+you know, a custom optimization for abort signals and the abort event. Because I think in most
+cases, you have a single, you know, call back on that. So I think there's possibility to make
+that quite a lot faster.
+Okay. Do we have any like a benchmark or anything regarding like what the differences
+with creating a node error versus a normal error?
+A node error. What do you mean?
+So sorry. So abort error versus the actual errors that we're putting on.
+I don't think it's the the abort case here. Actually, that is the biggest problem. It's adding and
+removing the event handler. I think we already have an issue for the slowness of creating errors.
+Yes. But that's also, you know, something to consider that when you actually are boarding,
+creating the node error is very, very, very slow. But I think that's secondary to, you know,
+making a normal path fast first. And then we can look at the exceptional path.
+Most of the cases that I realize is that we have lots of errors. We have troving lots of errors. I
+think Marvin is going to also mention this. We are troving errors and catching errors and
+troving is costly. Catching is almost costly because it's not in line by V8. And yeah,
+and I'm going to, like, keep it that way for now so that Marvin, I don't want to steal this
+thunder for today. But yeah, do you want to lead this or research on this about what we can do
+about it? Because it's quite a generic problem right now and I don't know. It's a little generic for
+me, I guess. So it was easy to just complain about it. That's true. I don't have bandwidth for
+that right now, but I'm happy to look into it in the future. Okay. Is there anybody interested
+right now in the team that can take a look at it? If not, I will even know that if somebody's
+interested, Robert, is interested in helping? I'm happy to help with it. I just can't spend many hours on it.
+Okay. Perfect. So yeah, let's continue to the next agenda item module resolution.
+Number 39. Let me share the link here. Yeah, maybe you can reflect two
+sentence on how this came to be and why it was important. I guess I noticed that a lot of tests
+it sent me a half, which I have written in just, which kind of duplicates the node runtime a little
+bit, but we noticed that the most slowdown was like 70% of the total tests and was just loading the
+module graph. And so a lot of this happens and use a lot and some of it happens to note because
+they kind of hook into the loading mechanisms as a note. And so I did a test like what if it just
+bundled everything to one giant JavaScript file, would that make any difference? And it turns out
+it cut like the test kind of time like in half or sometimes even improved it by 60%. So like one big
+block of JavaScript was way faster than just loading lots of tiny little files. And this let me
+down to your path like, hey, is there anything we could do to make module resolution faster? And
+the things I looked at and also pointed out on the article are mostly user-led libraries where
+it's like you said early like arrow creation is a very big point because most just say do
+I have a file at this resolved path? Is there an actual file there? And if yes, continue with that
+and if not check in other extension, for example, or check if it's an index file in a folder or
+something. And so you have like, I don't have a representation, but a very big part of
+module resolution is misses, essentially creating errors. And most tools, they don't care about
+errors. They just want to know if something exists or not. So it could be a Boolean value.
+So the whole point of arrow creation was kind of like slowing down everything. And it was very
+happy to see that we have it thrown with my entry. And the synchronous method was kind of helped
+here. But it was curious to see that we don't have such a thing for us as asynchronous methods.
+That might be room for improvement then.
+So we don't have to worry if no entry for asynchronous.
+No, no, that's okay. Well, that's that's the low-hanging food.
+Yeah. So there, a couple of months ago, I looked into the performance of read files.
+And current read file implementation actually sends three different C++ bridge communication,
+first of all, as stats, which like this status of the file. And then it tries to open it,
+and then it opens it, and then chunk by chunk reads and sends offers file. So there's definitely
+that we can do on the stats things file. At least adding a fast API might solve this,
+because it's pretty straightforward. If it can open or not, for this particular codeway that you
+added on the blog post, it's like its file can easily be done as a fast API, because it returns
+Boolean and takes a string, which is all accepted values for the API. So for this particular cases,
+if you can, if this is file is mostly used, and if this is like a bottleneck, I would be
+happy to add a certain API to the FS for this path. For other optimizations, if you can,
+if you can't read, like guide us through the process so that it would be a lot easier for
+people, for node contributors to consume your expertise and knowledge on this area, it would be
+a lot faster, because yeah, I don't know, because of anything, but I think it will, for this
+like is file or specific APIs that you think it's going to improve the performance. If we had that API,
+I would be happy to call them added to the node core. Yeah, I guess like the two, like I have
+went through various resolution packages that were an NPM or that popular tooling's used,
+even the Esput or Webpack or possibly, and how they do it. And you usually find like two checks,
+it's like, or three checks essentially. First, is it a file? Is it a directory? Because then I need
+to go and look up, is it an index file as possible? And the third one is sometimes they try to resolve
+the Zoom links, like via the real path function that we already have. Those are basically
+into three files, a three checks that all those sort of solution stuff do. So I'm not sure if it's
+worth it to have like an is file function or is directly function, that kind of does it.
+I guess it depends on how much you could save near a fast path compared to the stats
+or with no entry thing. So if you're doing this a lot of times,
+V8 will always prefer the fast path if we had V8 fast path. But I think the current return time
+of stat sync is highly complex that it won't be, it won't make sense to add a FSD API specifically
+for that. But for certain cases, we can always add and find fast solutions. Like for example,
+I did a similar thing for buffer that is UTF8, which was only like, which was initially used by
+only web sockets and other libraries, but it's creating a lot of impact. I think joy is raising.
+So the stats object is actually a symbol from a type array that gets synchronously updated in the
+native land. So I think it should be possible to like just do that in native because it's a type
+array. You don't need to allocate anything. So if we just pass the type array as an argument and
+then we can make this fast API. It's already accessible in the native land. You don't even need to pass
+it. It's attached to the environment. It's like a global thing that's already there. You can just
+do like, I think M stats array something then you have it. Do you want to comment on this issue
+about what we can do for stat sync so that if you or anybody is interested can contribute? Sure.
+But it's only for the synchronous one. The async one, I'm not sure if there's any additional
+asynchronous or if there's an additional type array. I think it's still passed into the native
+land. The creation is done in JavaScript before you invoke the native method. So that might be
+doable. Yeah. The other recommendation was that like TROV if no entry kind of like TROVing errors on
+stat sync or stat can also be configurable, which makes sense in terms of performance, I guess.
+Does this do create an error? Yeah, no, if there's, oh, okay. So if it's not there, there will be an error.
+Yeah, but it's probably C++ sign and like most of the users like Marvin are
+and catching it and then returning false or true depending on the issues and doing that then
+trying catches super costly. So are they using it to check if the file is there or do they actually
+need a stats object? Oh, we just need to know if the file is there or not. We don't get about
+the stats. I guess in that case, it should use FS exists instead of FS stats. Then there won't
+be any errors, I think. FS exists is deprecated though or not recommended anymore. I think it's
+deprecated in a special edge case, but it's fine not wise. So the issue for this was that stat is
+not equal to undefined and stat is a file or stat is feeful. That was the, let me share
+environments blog post in the chat. Yeah, I thought I might say I found like a few instances of
+that function that didn't check for the feeful bit and just check the first part. Like you find
+variations of this functions in all of code basis dealing with modular resolution.
+Yeah. Actually, there's a, yeah, there's a parameter called Trogethnoyntry inside FS.sync.
+So the, I think that the precaution in exists sync was actually what's causing the trouble.
+It's like, there's a to do by myself. So previously, if you passing an invalid path,
+like a bogus path, that's not path. Then it will throw an error, but you will return false.
+I don't remember why. Oh, so big. Cause I'm not actually know why, but like that was previously a thing
+that we have to maintain somehow for compatibility, but
+what do we even need to defecate that? What do we even need to validate it? I'm not sure.
+But yeah, that I don't think that's going to get in a way, like even if it does,
+what we need to defecate is what's causing the performance problem. So if we actually do the
+precaution, the problem will go away because there won't be any unnecessary errors.
+Yeah, the precaution.
+I have a little to the notes. And also, if we added a second parameter to FS exists sync function
+for whether checking if it's a file or anything else, I think that would also improve
+your particular function too. Yeah, that would be good. Yeah, it's easy to,
+okay, I'm not sure on where it's added. It's essentially, it's not just, does this part exist,
+but also is it a time file or is it a data, a folder?
+If you can create an issue in either node, performance or node core,
+regarding what you think is a good recommendation, is a good API for this,
+I would be happy to take a look at this. Yeah, we'll do.
+And the last part of your blog post was mentioning about how caching should be done
+and because searching for different extensions was costly, right?
+Yeah, exactly. I'm not sure if how much node is affected, but I haven't checked.
+It's mostly like user-land libraries features repeatedly resolve the same parts over and over again.
+And you know, like in most of frontend projects, there's a lot of aliasing going on in various
+packages. You have to resolve export maps and extensions. So there are some steps involved
+to that. And typically, one resolve calls expands to multiple file system calls.
+And doing that repeatedly can be very costly.
+Yeah, I think the most hard part of this problem is when to invalidate a cache and want to
+data cache and I don't know, I don't have any in-depth knowledge in a file, maybe join your
+robots. Can I answer that? If it's possible to cache?
+Passing file systems, no, I mean, once you've called it once, the next time you call it,
+it might have changed on the file system. Then you need to hook into some kind of notification
+from the file system to ensure that the cache value is correct.
+Sounds like a reveal. Yeah, so
+that's true. And that's hooking stuff. So the hooking stuff in Linux is, so LibuV doesn't handle
+that correctly, recursive virtual. That's why I literally spent three weeks on just adding
+recursive options towards the file. But yeah. Yeah, that's an option to go down.
+I leave it to user-land to cache them and then they can choose if, you know,
+stale values are acceptable and how stale they can be.
+Yeah, usually it makes more sense for the users to actually do the caching because they
+would have more knowledge about what they're actually doing this calls for.
+Actually, you know, the correct way of doing this is you open the file, get a file handle,
+and then you do start and read the file, et cetera, once you have the file handle.
+Because if you know, check if a path exists and then open the file, it might not be the same file
+anymore because the file system underneath. The only way to guarantee that you have a consistent
+view of this is to get the file handle. And then, you know, even if Linux renames or the operating
+system renames or overrides it or whatever, you still have the same physical file.
+Well, what do you all think about adding caching support, but also adding
+invalidating that cache through a path prefix? So for like, for build systems, caching is
+like really important, right? So let's think of about, like, I was thinking about an API to add
+like a cache through a BooleanTrue kind of parameter to the read file function. And then
+calling a first start, like delete cache function with a specific path. And if the cache
+values are starting like prefix with that value, then it would give us and give the build systems
+an interface to cache them without having those certain checks. Because checking them on the
+JavaScript site is also small, whether I should, like, whether I should cache it or not, if it's
+cache, that's also costly, right? So I mean, some kind of times them or like,
+the kind of stamp that make uses to, like, providing that kind of
+API for them. Yeah, but we don't need to care about how the caching is done. We just cache it
+or providing a way to delete it so that they don't have the check it. So if they want, if they don't
+want to opt in, that's fine, that's the only solution. But if they want to opt in, but they want to
+invalidate a cache before doing it, before doing it 30, but then they can provide an absolute
+year out of the parent folder. And then all of those cached inputs that start with that parent
+folder might be invalidated. I don't know. I'm just thinking out loud.
+I have a hunch that this will be very difficult to support for
+niche platforms. So it might be a better idea for them to do it on the use line so that, you know,
+they can just say, oh, we only support Linux and Mac OS and maybe Windows and that's all. We don't
+support, I don't know, small less. Yeah, yeah, that's also a problem. So if we can't address the
+caching problem, then we can address how to make caching or searching for like the overhead of
+caching it a lot less less of an issue, I guess.
+Just to reiterate, the overhead of caching, one of the issue was that was no conscious at all.
+Yeah. So I'm kind of, for what I'm getting from this discussion, it kind of makes sense. The
+tricky bit is when they invalidate that. And it might be something that is best done in years
+or then because they know, in the case of like bundling to its or dinting to its or whatever,
+they typically have in watch mode a watch list in any way and whenever something watches the
+invalidate cache for certain entries. Yeah, but so the issue with that is that if you do it on
+the user lens, then if you have 1000 files searching through the cache, if I have a cache for
+this or not, it's also a super big problem. If you do it by array, then it's really bad. You can
+do it with map or blah, blah, blah, but at least then you're storing it on the memory and it's,
+yeah, JavaScript side is always slow. So I was thinking about like providing necessary features to
+make caching a lot faster for JavaScript user net, but I don't have any solution for this.
+At least for now. Yeah, that's a good point. I feel like this might need more brain power.
+Yeah. Okay. So is there any other comments on this?
+Yeah, and let's put it. Yeah, I guess like one thing I could also add. I'm not sure how applicable
+that is to action of things, but one thing I noticed is in the example, like the
+monograph, as it becomes pretty big, it's a big problem to resolve everything and load everything.
+And so the next question is, can you show us the kids that somehow because you know some branches
+are not needed? But it's a bit tricky to do in the way current code is written when it comes to
+use, and because most just have the top level synchronous import and it just goes through everything
+despite the function may be not being used. There's also one aspect because why bundling everything
+got faster because it kind of dropped all of the code that wasn't needed. And so because
+the bundler knows, okay, even if it's a static import at the top, I know this is not used,
+so it can just kill it completely. And that's not something that can easily do in nativeism.
+I guess like what I'm saying is for every bigger project I've worked on, the module graph
+becomes a bigger and bigger issue over the size and depth of it.
+For the like for that particular case, we might adopt the side effects
+field from packaging and depending on the field of side effects, we might not choose to import
+that particular require if it's not used. But again, that would be a breaking change, I guess.
+I feel like that's a slippery slope because even to me, it feels like fronted to its
+own really entirely on board. What the side effect field actually means because everybody
+does a slightly little different thing. So I'm not sure. Yeah, I was mostly for a second
+actually. I received the book. Can you say that the last part? Again, if you don't mind.
+Yeah, with the side effects thing, it's been an exhibition of Bromptonwood for a while,
+but every tool handles it a little bit differently. So it feels hard to find like consensus
+and how it should work. And I'm a bit worried on folks basing that off of that.
+So I don't have a proper solution to that problem. Maybe it's we need like synchronous require
+and use any or something like that. It's just something I noticed in that was also one
+factor why the bundled foils was so fast. Okay. Yeah, that makes sense.
+So if there's not any comments, we can continue to the next issue, but is joy raising
+your hand or sorry, I just forgot to. Sorry, I thought you were going to say something.
+Norris, so let's continue to the last, not not not left. So the next issue at support for V8
+fast call, which is 23. Regarding this, I made some research. I opened the pull request to note.
+I received lots of feedback. I don't have any chance to look the last
+changes, but right now it's on 94 different reviews. So yeah, I will I need to go over this once
+again and resolve everything and then we can merge it. But again, even with this portion of the
+document, it's pretty insightful about how and when you can use V8 fast APIs. If there's anything
+if there's any questions regarding it, I'll be happy to answer it.
+If not, we can close this issue and the features. Yeah, I have actually one thing there.
+What about the possibility to provide this for a node API users as well? People, people building
+add-ons. Yeah, the V8 side, I think it's possible, but I don't know very good to an API.
+So I'm not the correct person to ask this, but could we ping the someone from the node API team
+about this? I think we have an API team of Node.js, right? Node.js or GitHub organization.
+Yeah, maybe. I actually don't know, but I can also ping them. I just thought that might be
+the last missing piece in that company. Okay. Yeah, so let's keep the issue open then, and
+if you can or can't add an API, then you can close it or open an issue, but let's keep the current issue
+near as well. And with the issues and like FS file stream and other things,
+we can use V8 FS APIs. Yeah, so let's continue to the next one, which is
+buffer-to-screen texty code. This feels like a fight between
+buffer-to-screen and texty code. But for large strings, texty code has walled this,
+but for small strings, the overhead of, somehow overhead of changing between C++ is causing the
+issues. Is there any new comments regarding? I mean, it feels like we should be at least a buffer
+to string should be, you know, if text decoder or encoder is faster for short strings, then
+shouldn't just buffer-to-screen fall back to that if the string length is above a certain threshold.
+It has the best of both worlds. Yes, we can do that. I guess so. Two-string functionalities
+quite complicated, by the way, because it supports all those different encodings and switching
+between encodings are optimized in the JavaScript user length of note, but it is slow. So,
+if you care about performance, I think you should always use text decoder and encoders instead
+of buffer-to-string. Okay, that's also fair guidance. Yeah, because like, even that's a really great
+recommendation.
+It goes like, so buffer-to-string supports all sorts of different encodings and even iterating,
+checking if UTF8 is UTF8 or it has dash or its uppercase or lowercase, this is always costly,
+and for text decoder, we don't have those kinds of things, and we have fast paths. If you have
+UTF8 as a function, if you have fatal-true with those kinds of things, it's always going to go
+to the faster path and resolve it. So, yeah, let's improve the docs for this to add
+to update text decoder. We should use text decoder if you care about performance in certain cases.
+Yeah, if anybody wants to take over it, that would be great.
+Let's continue to the next one. Fetch issue number 11.
+Yeah, this is quite a big issue. I don't know, Robert, do you want to take this?
+I think we've made some improvements already. I think Raphael is the one that's hearing that.
+Yeah, I don't really have so much to add if I'm honest.
+Okay, I feel like we should close this issue. For now, if there is anything much more specific
+to look to dive into, let's say if it's a regression or if you want to improve a certain path,
+I recommend just closing this issue and opening a much more direct issue.
+Okay, so, closing it.
+Let's continue to the next part. What would you choose?
+Issue number nine. I sent you the link.
+I think this is mainly because of like fetches slow due to wet-witchy spines.
+Raphael invested a lot of thylondis. The conversation is still ongoing. I think
+let's skip this issue for now for this meeting and next time Raphael is here,
+then we can focus on this.
+Next, and the last issue is buffers. We tried to eat a lead, really great
+rakex github issue title, which is issue number two. This is mainly, yeah, Robert can I think explain this.
+Which one? The buffer, yeah. Yes, we tried.
+I've been writing some proto-buff tenis and then you have to write the integers,
+32 bit integers, etc. And the node implementation is purely in JavaScript, writing bytes,
+and it's quite slow. Using the standardized data view is almost three times faster.
+So, one idea that I proposed here is to just have a data view instance with the buffer
+and then use that when setting and reading, but from my test, that was actually slower.
+So, I'm not sure how to achieve the data view performance without using or
+through the buffer instance.
+We can always ask James, I guess James is the most expert person on buffer.
+I see. This is the few times I miss multiple inheritance from
+but it would actually even be better if we didn't have the instantiated data view and could just
+call the native methods directly with the typed or the array buffer.
+But I haven't been able to figure out whether or not that is possible.
+But there is a theoretical, quite significant performance
+increase here. What I've been doing now is that I'm creating this
+buffer object that has an instance of a buffer and it has an instance of a view
+and it has an instance of a typed array and then whatever I'm going to do with it,
+I'm using the foster instance, but that's not so nice.
+Okay, but I don't know how to continue with this, but pinging games maybe is a good idea.
+Yeah. Nobody else wants to dig into it.
+Yeah, I think so. Yeah, so this is the last issue before we close the meeting. I can share some
+news. I'm working on one of the issues in the performance repository, which is not only
+the performance agenda, maybe I should add it. Investigates flow, maybe, or else. So I'm
+currently working on the writing, rewriting the URL parser in C++. It's available on
+GitHub as ADA. Right now it's for 13 URLs, it's five times faster than curl and six times faster than
+boost. I think that's me and Daniel, Daniel Lamire, which is the author of S I M D U T F library.
+We're going to release the first version of ADA this week and next week, mid next week,
+I will try to open an issue, open a pull request note to replace the URL parser so that we can
+benchmark it. But while doing that, I've found out an issue in issue with parsing URLs and Miguel
+grabbed the issue, solved it, and the pull request got merged today. So right now we have around
+32, 60% faster, leave your own instantiation due to it. So I think he's not here, but like
+thank you for your contribution. And for anybody who's interested in the pull request,
+this is the issue and this is the pull request that he opened and got merged.
+So yeah, if there isn't any other comments, I think this is it for today.
+Anybody want to share something before we close?
+Okay, thank you all for coming. So see you in two weeks. Cheers. Cheers.
