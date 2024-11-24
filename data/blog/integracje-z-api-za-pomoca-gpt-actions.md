@@ -3,20 +3,20 @@ title: 'Integracje z API za pomocą GPT Actions'
 date: '2024-11-24'
 tags: ['GPT Actions', 'Integracja API', 'ChatGPT', 'automatyzacja', 'OpenAPI', 'Agenty AI']
 draft: false
-summary: 'GPT Actions to funkcja ChatGPT umożliwiająca integrację z zewnętrznymi API, co pozwala na automatyzację zadań i tworzenie zaawansowanych interakcji. W artykule zademonstrowano jej zastosowanie, obliczając odległości użytkowników z API jsonplaceholder od zadanego punktu i wizualizując wyniki na mapie oraz wykresach.'
+summary: 'GPT Actions to funkcja ChatGPT umożliwiająca integrację z zewnętrznymi API, co pozwala na automatyzację zadań i tworzenie zaawansowanych interakcji. W artykule zademonstrowano jej zastosowanie poprzez obliczenie odległości użytkowników z API jsonplaceholder od zadanego punktu i wizualizując wyniki na mapie oraz wykresach.'
 ---
 
 # Wprowadzenie
 
-Ostatnio temat agentów AI zaczął mnie coraz bardziej interesować. Coraz więcej informacji pojawia się na ten temat. Postanowiłem zebrać informacje na ten temat w kontekście ChatGPT. Podczas przeglądania różnych artykułów, natknąłem się na informacje o [GPT Actions](https://platform.openai.com/docs/actions/introduction). Postanowiłem dowiedzieć się więcej na temat tej funkcji.
+Ostatnio temat agentów AI zaczął mnie coraz bardziej interesować. Coraz więcej informacji pojawia się na ten temat. Postanowiłem zebrać informacje na ten temat w kontekście ChatGPT. Przeglądając różne artykuły, natrafiłem na informacje o [GPT Actions](https://platform.openai.com/docs/actions/introduction). Postanowiłem dowiedzieć się więcej na temat tej funkcji.
 
 # Co to jest GPT Actions?
 
-GPT Actions to funkcja, która pozwala na integrację zewnętrznych serwisów z ChatGPT. Dzięki temu można tworzyć bardziej zaawansowane interakcje z ChatGPT. Można to wykorzystać do automatyzacji zadań, takich jak wysyłanie wiadomości w Microsoft Teams, tworzenie obiektów w systemie Jira czy Notion, albo do pozyskiwania danych z API oraz zaprezentowanie ich w interesujący sposób, np za pomocą wykresów czy tabel.
+GPT Actions to funkcja, która pozwala na integrację zewnętrznych serwisów z ChatGPT. Dzięki temu możliwe jest tworzenie bardziej zaawansowanych interakcji z ChatGPT. Funkcja ta umożliwia automatyzację zadań, takich jak wysyłanie wiadomości w Microsoft Teams, tworzenie obiektów w systemie Jira czy Notion, albo do pozyskiwania danych z API oraz zaprezentowanie ich w interesujący sposób, np. za pomocą wykresów czy tabel.
 
 # Jak działa GPT Actions?
 
-Poniżej przedstawiam diagram sekwencyjny, który obrazuje jak działa GPT Actions:
+Poniżej przedstawiam diagram sekwencyjny, który pokazuje, jak działa GPT Actions:
 
 ![Diagram sekwencyjny](/blog/integracje-z-api-za-pomoca-gpt-actions/diagram-sekwencyjny-gpt-actions.jpg?style=centerme)
 
@@ -28,13 +28,13 @@ Wyjaśnienie kroków:
    1. Ten schemat jest zgodny z dokumentacją API, a dokładniej standardem OpenAPI.
    2. W przypadku braku schematu można wykorzystać [dedykowaną customową wersje GPT](https://chatgpt.com/g/g-gQ0FMGHmb-openapi-gpt) do jego wygenerowania.
 4. GPT uwierzytelnia się i wykonuje wywołanie API do API Zewnętrznego.
-   1. W przypadku danych firmowych **uwierzytelnienie musi wymagać dodatkowych kroków**, takich jak generowanie tokena JWT, albo klucza API.
+   1. **W przypadku danych firmowych uwierzytelnienie musi obejmować dodatkowe kroki**, takie jak generowanie tokena JWT, albo klucza API.
 5. API Zewnętrzne zwraca odpowiedź do GPT.
 6. GPT przetwarza i formatuje odpowiedź w przystępnej formie.
 
 # Przykłady zastosowań GPT Actions
 
-Zaprezentuję przykład utylizacji GPT Actions w praktyce. Wykorzystam [jsonplaceholder](https://jsonplaceholder.typicode.com/users), które oferuje darmowe API do testowania. 
+Zaprezentuję przykład utylizacji GPT Actions w praktyce. Wykorzystam [jsonplaceholder](https://jsonplaceholder.typicode.com/users), które udostępnia darmowe API do testowania. 
 
 Przykład użycia to obliczenie odległości każdego użytkownika od zadanego punktu, oraz zwizualizowanie tego na mapie.
 
@@ -42,14 +42,14 @@ Przykład użycia to obliczenie odległości każdego użytkownika od zadanego p
 
 ## Krok 1: Utworzenie customowej wersji GPT.
 
-W tym kroku tworzymy customową wersję GPT w której zawieramy informacje o tym, jakie zadanie chcemy wykonać. W naszym przypadku chcemy obliczyć odległość każdego użytkownika od zadanego punktu. Tutaj można wpaść w pułapkę, ponieważ naszym zadaniem nie jest pobranie danych z API, a obliczenie odległości.
+W tym kroku tworzymy customową wersję GPT, w której definiujemy zadanie do wykonania.. W naszym przypadku chcemy obliczyć odległość każdego użytkownika od zadanego punktu. Tutaj można wpaść w pułapkę, ponieważ naszym zadaniem nie jest pobranie danych z API, a obliczenie odległości.
 
 Zapraszam do zapoznania się z artykułem [Tworzenie customowych wersji GPT dla swoich potrzeb](https://aidlazabieganych.pl/blog/tworzenie-customowych-gpt-dla-swoich-potrzeb) w którym opisuję jak stworzyć customową wersję GPT.
 
 ## Krok 2: Dodanie GPT Actions do customowej wersji GPT.
 
-Ten krok jest kluczowy, ponieważ dodajemy do naszej customowej wersji GPT możliwość wywołania API. W tym przypadku wywołamy API, które zwróci nam listę użytkowników.
-W pierwszej kolejności musimy wygenerować [schemat OpenAPI](https://swagger.io/specification/) dla wywołania API. Możemy to zrobić ręcznie, ale polecam skorzystanie z [OpenAPI GPT](https://chatgpt.com/g/g-gQ0FMGHmb-openapi-gpt), który wygeneruje schemat na podstawie obiektu JSON, lub skorzystanie z [OpenAPI Designer](https://editor.swagger.io/), który pozwala na stworzenie schematu wizualnie.
+Ten krok jest kluczowy, ponieważ dodajemy do naszej customowej wersji GPT funkcję wywołania API. W tym przypadku wywołamy API, które zwróci nam listę użytkowników.
+Najpierw musimy posiadać [schemat OpenAPI](https://swagger.io/specification/) naszego API. Gdy jednak go nie posiadamy, rekomenduję skorzystanie z [OpenAPI GPT](https://chatgpt.com/g/g-gQ0FMGHmb-openapi-gpt), który wygeneruje schemat na podstawie obiektu JSON, lub [OpenAPI Designer](https://editor.swagger.io/), który pozwala na stworzenie schematu wizualnie.
 
 ![OpenAPI Schema](/blog/integracje-z-api-za-pomoca-gpt-actions/json-to-openapi-schema.jpg?style=centerme)
 
@@ -59,7 +59,7 @@ W panelu tworzenia customowej wersji GPT, znajduję się opcja "Actions". Klikam
 
 ![Otwieranie okna GPT action](/blog/integracje-z-api-za-pomoca-gpt-actions/gpt-action-1.jpg?style=centerme)
 
-Następnie dodajemy schemat OpenAPI do naszej akcji.
+Następnie wprowadzamy schemat OpenAPI do naszej akcji.
 
 ![Dodawnie OpenAPI schema do GPT action](/blog/integracje-z-api-za-pomoca-gpt-actions/gpt-action-2.jpg?style=centerme)
 
@@ -67,7 +67,7 @@ Następnie dodajemy schemat OpenAPI do naszej akcji.
 
 Teraz możemy skupić się na zrealizowaniu naszego zadania. W tym przypadku chcemy obliczyć odległość każdego użytkownika od zadanego punktu. 
 
-Najpiękniejsze w tym wszystkim jest to, że nie musimy zawierać w promptach informacji o wywołaniu API. GPT sam zrozumie, że musi wywołać API, ponieważ schemat OpenAPI jest dodany do akcji.
+Najlepsze jest to, że w promptach nie trzeba umieszczać informacji o wywołaniu API. ChatGPT sam zrozumie, że musi wywołać API. Dzieje się tam, ponieważ obecne modele potrafią analizować kontekst i zrozumieć, co użytkownik chce osiągnąć. Gdy ChatGPT zrozumie, że musi wywołać API, wykorzysta schemat OpenAPI, który dodaliśmy do naszej customowej wersji GPT.
 
 Mój prompt wygląda następująco:
 ```
@@ -94,7 +94,7 @@ To nie są losowe dane, te dane pochodzą z API [jsonplaceholder](https://jsonpl
 
 ## Krok 4: Przetworzenie odpowiedzi
 
-Ostatni krok to przetworzenie odpowiedzi. Wygenerujmy wykres, który przedstawia odległość każdego użytkownika od zadanego punktu, oraz zwizualizujmy to na mapie.
+Ostatni krok to przetworzenie odpowiedzi i wygenerowanie wykresu, który przedstawia odległość każdego użytkownika od zadanego punktu, oraz zwizualizujmy to na mapie.
 
 Mój prompt wygląda następująco:
 ```
@@ -122,11 +122,11 @@ Odpowiedź:
 
 # Podsumowanie
 
-Zademonstrowałem jak można wykorzystać GPT Actions do integracji z API. GPT Actions pozwala na tworzenie bardziej zaawansowanych interakcji z ChatGPT. Można to wykorzystać do automatyzacji zadań, takich jak wysyłanie wiadomości w Microsoft Teams, tworzenie obiektów w systemie Jira czy Notion, albo do pozyskiwania danych z API oraz zaprezentowanie ich w interesujący sposób, a następnie zwizualizowanie ich w interesujący sposób.
+Zaprezentowałem sposób wykorzystania GPT Actions do integracji z API. Ta funkcjonalność umożliwia budowanie bardziej zaawansowanych interakcji z ChatGPT, co daje możliwość automatyzacji zadań, takich jak przesyłanie wiadomości w Microsoft Teams, tworzenie elementów w systemach Jira czy Notion, a także pobieranie danych z API i ich przedstawienie w ciekawej formie, z opcją dodatkowej wizualizacji.
 
-Proszę sobie wyobraźć jakie możliwości daje GPT Actions dla wszystkich tych, którzy chcą zautomatyzować swoje zadania:
+Wyobraź sobie możliwości, jakie oferuje GPT Actions wszystkim tym, którzy pragną usprawnić i zautomatyzować swoje codzienne zadania:
 
-- Manager przygotowujący raporty. Może zautomatyzować proces zbierania danych z różnych źródeł, a następnie przedstawić je w interesujący sposób.
-- Product owner tworzący zadania w systemie Jira. Może zautomatyzować proces tworzenia zadań z surowych notatek i przypisywania ich do odpowiednich osób.
+- **Menadżer opracowujący raporty**: Może zautomatyzować zbieranie danych z różnych źródeł, a następnie przekształcić je w przejrzyste i atrakcyjne wizualnie raporty.
+- **Product owner zarządzający zadaniami w systemie Jira**: Ma możliwość automatycznego przekształcania surowych notatek w zadania oraz przypisywania ich do odpowiednich członków zespołu.
 
-W mojej opinii GPT Actions jest obiecującą funkcją, która doskonale wpisuje się w trend automatyzacji zadań i agentów AI. Warto zainteresować się tą funkcją i zacząć ją wykorzystywać w praktyce.
+W mojej opinii GPT Actions jest obiecującą funkcjonalnością, która doskonale wpisuje się w trend automatyzacji i agentów AI. Warto zainteresować się tą funkcją i zacząć ją wykorzystywać w praktyce.
