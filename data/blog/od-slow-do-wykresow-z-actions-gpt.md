@@ -1,9 +1,10 @@
 ---
 title: 'Od słów do wykresów z Actions GPT'
 date: '2024-11-24'
-tags: []
+tags: [ChatGPT, API, raporty, wizualizacja danych, OpenAPI, integracje, automatyzacja]
 draft: false
-summary: ''
+summary: 'Artykuł opisuje proces tworzenia raportów sprzedażowych z wykorzystaniem ChatGPT i integracji z API, umożliwiający generowanie danych bez znajomości programowania czy SQL. ChatGPT automatycznie przekształca pytania użytkownika na zapytania do API, pobiera dane i prezentuje je w przystępnej formie, np. tabel czy wykresów. Tworzenie takich integracji wymaga wiedzy technicznej, ale końcowy rezultat jest prosty w obsłudze dla osób nietechnicznych.'
+
 ---
 
 # Wprowadzenie
@@ -61,7 +62,7 @@ Odpowiedź:
 
 # Podsumowanie
 
-W tym artykule pokazałem jak można wykorzystać ChatGPT do generowania raportów z wykorzystaniem zewnętrznego API. Dzięki temu, osoba generująca raport nie musi znać języka programowania, SQL czy innych technologii. Wystarczy, że potrafi zdefiniować pytanie, które chce zadać ChatGPT, a ten zrobi resztę. 
+W tym artykule pokazałem jak można wykorzystać ChatGPT do generowania raportów z wykorzystaniem zewnętrznego API. Dzięki temu, osoba generująca raport nie musi znać języka programowania, SQL czy innych technologii. Wystarczy, że zdefiniuje pytanie i przekaże je do ChatGPT. Model automatycznie przekształci wymagania na odpowiednie zapytanie do API, pobierze dane i zwróci je w odpowiedniej formie. 
 
 Tworzenie takich integracji wymaga wiedzy technicznej, jednak rezultatem jest narzędzie, które może być wykorzystane przez osoby, które nie znają się na technologii.
 
