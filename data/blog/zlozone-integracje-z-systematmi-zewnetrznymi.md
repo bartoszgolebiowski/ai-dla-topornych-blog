@@ -33,7 +33,7 @@ Jaka była sprzedaż produktu "smart watch" w marcu 2023
 
 W pierwszej kolejności ChatGPT próbuje zrozumieć zapytanie. Zastanawia się, czy spośród zdefiniowanych integracji, znajdują się takie, które mogą pomóc w odpowiedzi na zadane pytanie. Jeżeli tak, to następnym krokiem jest wytypowanie tych integracji, które są potrzebne do uzyskania odpowiedzi.
 
-![Wybieranie integracji](/blog/zlozone-integracje-z-systematmi-zewnetrznymi/wybiernaie-integracji.jpg?style=centerme)
+![Wybieranie integracji](/blog/zlozone-integracje-z-systematmi-zewnetrznymi/wybieranie-integracji.jpg?style=centerme)
 
 Kolorem zielonym zaznaczone są integracje, które są potrzebne do uzyskania odpowiedzi na zadane pytanie. Kolor czerwony oznacza integracje, które są zbędne. Gdy już zostały wybrane integracje, ChatGPT zastanawia się, w jakiej kolejności powinny być wywoływane zapytania API.
 
@@ -49,13 +49,15 @@ Modele GPT, takie jak ChatGPT, są na tyle zaawansowane, że potrafią zrozumie�
 
 Takie podejście umożliwia przekształcenie tradycyjnych, skomplikowanych interfejsów użytkownika, wypełnionych wieloma polami formularzy, w proste i intuicyjne interakcje w języku naturalnym. Zamiast wymagać od użytkowników wypełniania formularza, można pozwolić im poprosić asystenta o pomoc w naturalny sposób.
 
-# Ekstra materiały
+# Pełny przykład użycia łancucha zapytań API
 
-Tak wygląda zapytanie do ChatGPT:
+Załóżmy scenariusz, że użytkownik chciałby pobrać dane o sprzedaży produktu o zadanym identyfiaktorze dla każdego unikalnego klienta, który go kupił.
+
+Tutaj przykład zapytania i ostatecznego rezultatu:
 
 ![Przykład chatu.](/blog/zlozone-integracje-z-systematmi-zewnetrznymi/rezultat.jpg?style=centerme)
 
-Jak to możliwe? Oto diagram sekwencji:
+Oto diagram sekwencji, który pokazuje cały proces:
 
 ![Diagram sekwencji.](/blog/zlozone-integracje-z-systematmi-zewnetrznymi/diagram-sekwencji.jpg?style=centerme)
 
