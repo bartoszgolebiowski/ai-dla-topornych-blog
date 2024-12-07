@@ -1,5 +1,5 @@
 ---
-title: 'Złożone integracje z systematmi zewnętrznymiza pomocą ChatGPT i Actions GPT'
+title: 'Złożone integracje z systematmi zewnętrznymi za pomocą ChatGPT i Actions GPT'
 date: '2024-12-07'
 tags: ['ChatGPT', 'GPT', 'API', 'integracje', 'Actions GPT', 'automatyzacja']
 draft: false
