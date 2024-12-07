@@ -45,7 +45,7 @@ Ciekawostką jest to, że ChatGPT potrafi rozpoznać, że dane z jednego systemu
 
 # Wnioski
 
-Modele GPT, takie jak ChatGPT, są na tyle zaawansowane, że potrafią zrozumieć kontekst i realizować bardziej złożone zadania dzięki kompozycji zapytań API. Co więcej, ChatGPT jest w stanie rozpoznać, które integracje są niezbędne do udzielenia odpowiedzi na zadane pytanie.
+Modele GPT, są na tyle zaawansowane, że potrafią zrozumieć kontekst i realizować bardziej złożone zadania dzięki kompozycji zapytań API. Co więcej, ChatGPT jest w stanie rozpoznać, które integracje są niezbędne do udzielenia odpowiedzi na zadane pytanie.
 
 Takie podejście umożliwia przekształcenie tradycyjnych, skomplikowanych interfejsów użytkownika, wypełnionych wieloma polami formularzy, w proste i intuicyjne interakcje w języku naturalnym. Zamiast wymagać od użytkowników wypełniania formularza, można pozwolić im poprosić asystenta o pomoc w naturalny sposób.
 
