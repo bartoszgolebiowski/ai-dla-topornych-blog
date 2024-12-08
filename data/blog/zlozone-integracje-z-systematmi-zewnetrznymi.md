@@ -49,7 +49,7 @@ Modele GPT, są na tyle zaawansowane, że potrafią zrozumieć kontekst i realiz
 
 Takie podejście umożliwia przekształcenie tradycyjnych, skomplikowanych interfejsów użytkownika, wypełnionych wieloma polami formularzy, w proste i intuicyjne interakcje w języku naturalnym. Zamiast wymagać od użytkowników wypełniania formularza, można pozwolić im poprosić asystenta o pomoc w naturalny sposób.
 
-# Pełny przykład użycia łancucha zapytań API
+# Extra - wizualizacja scenariusza interakcji z Chatem GPT
 
 Załóżmy scenariusz, że użytkownik chciałby pobrać dane o sprzedaży produktu o zadanym identyfiaktorze dla każdego unikalnego klienta, który go kupił.
 
@@ -60,6 +60,10 @@ Tutaj przykład zapytania i ostatecznego rezultatu:
 Oto diagram sekwencji, który pokazuje cały proces:
 
 ![Diagram sekwencji.](/blog/zlozone-integracje-z-systematmi-zewnetrznymi/diagram-sekwencji.jpg?style=centerme)
+
+Dane wymienione z systemu 1 są wykorzystywane jako dane wejściowe dla systemu 2:
+
+![HTTP](/blog/zlozone-integracje-z-systematmi-zewnetrznymi/http.jpg?style=centerme)
 
 Wizualizacja interakcji z Chatem GPT:
 
