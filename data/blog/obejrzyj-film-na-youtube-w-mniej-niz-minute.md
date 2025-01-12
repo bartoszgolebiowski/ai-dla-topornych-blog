@@ -33,7 +33,7 @@ W tym artykule pokażę Ci, jak połączyć możliwości CustomGPT z [serwisem d
 
 Jak pozyskać transkrypcję z filmu na YouTube? Oto krok po kroku:
 
-![Jak uzyskać transkrypcje](/obejrzyj-film-na-youtube-w-mniej-niz-minute/jak-uzyskac-transkrypcje.jpg)
+![Jak uzyskać transkrypcje](/blog/obejrzyj-film-na-youtube-w-mniej-niz-minute/jak-uzyskac-transkrypcje.jpg)
 
 1. **Znajdź interesujący Cię film na YouTube**. Skopiuj jego link.
 
@@ -45,7 +45,7 @@ Jak pozyskać transkrypcję z filmu na YouTube? Oto krok po kroku:
 
 Gdy już masz plik transkrypcji, możesz skorzystać z CustomGPT, by uzyskać esencję z tekstu. W tym celu:
 
-![Przykładowa konwersacja](/obejrzyj-film-na-youtube-w-mniej-niz-minute/demo.gif)
+![Przykładowa konwersacja](/blog/obejrzyj-film-na-youtube-w-mniej-niz-minute/demo.gif)
 
 1. **Otwórz [Transcript Summarizer Pro](https://chatgpt.com/g/g-677c23d438cc819189361e3e2db5e352-transcript-summarizer-pro)**.  
    1.1. **Stwórz własny CustomGPT**. W jednym z poprzednich artykułów zaprezentowałem jak stworzyć customowego GPT. [Tworzenie customowych wersji GPT dla swoich potrzeb](https://aidlazabieganych.pl/blog/tworzenie-customowych-gpt-dla-swoich-potrzeb).
